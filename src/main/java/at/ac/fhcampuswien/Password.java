@@ -42,8 +42,8 @@ public class Password {
         else return false;
     }
 
-    boolean checkContainNumber(String password){
-        return true;
+    boolean checkContainNumber(){
+       return this.password.matches(".*[1-9].*");
     }
 
     boolean checkNumbersCont(String password){
@@ -54,8 +54,14 @@ public class Password {
         return true;
     }
 
-    boolean containSpecialCharacter(String password){
-        return true;
+    boolean containSpecialCharacter(){
+        boolean containsSpecialCharacter = this.password.matches(".*[!@#$%()?/].*");
+        boolean containsNoOtherSpecialCharacter = this.password.matches("[a-zA-Z0-9!@#$%()?/]*");
+
+        if (containsSpecialCharacter&&containsNoOtherSpecialCharacter){
+            return true;
+        }
+        else return false;
     }
 
 
