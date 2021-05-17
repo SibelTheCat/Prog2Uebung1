@@ -20,7 +20,12 @@ public class Password {
     }
 
     boolean checkPassword(){
-        if(passwordLength()){
+        if(passwordLength()
+        && checkUpperAndLowerCase()
+        && checkContainNumber()
+        && checkNumberSame()
+        && checkNumbersCont()
+        && containSpecialCharacter() ){
             return true;
         }
         else return false;
@@ -47,7 +52,7 @@ public class Password {
     }
 
     boolean checkNumbersCont(){
-        if (checkContainNumber()== false) {
+        if (this.checkContainNumber()== false) {
             return false;
         }
 
