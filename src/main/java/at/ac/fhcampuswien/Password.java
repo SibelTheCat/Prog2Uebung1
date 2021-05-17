@@ -46,11 +46,41 @@ public class Password {
        return this.password.matches(".*[1-9].*");
     }
 
-    boolean checkNumbersCont(String password){
-        return true;
+    boolean checkNumbersCont(){
+        if (checkContainNumber()== false) {
+            return false;
+        }
+
+        //help from https://stackoverflow.com/questions/4047808/what-is-the-best-way-to-tell-if-a-character-is-a-letter-or-number-in-java-withou
+        else
+            // look for a number in the string, then check if the two foolowing chars are also numbers, if so, add all numbers and devide by 3, if they equal the number
+        //after the first number the numbers are continous. then retrun false
+            for (int i = 0; i < this.password.length()-2; i++){
+            if (Character.isDigit(this.password.charAt(i))&& Character.isDigit(this.password.charAt(i+1)) && Character.isDigit(this.password.charAt(i+2))){
+                if (((this.password.charAt(i))+(this.password.charAt(i+1))+(this.password.charAt(i+2)))/3 == (this.password.charAt(i+1))) {
+                    return false;
+                }
+            }
+        }
+            return true;
     }
 
-    boolean checkNumberSame(String password){
+    boolean checkNumberSame(){
+        if (checkContainNumber()== false) {
+            return false;
+        }
+
+        //help from https://stackoverflow.com/questions/4047808/what-is-the-best-way-to-tell-if-a-character-is-a-letter-or-number-in-java-withou
+        else
+            // look for a number in the string, then check if the two foolowing chars are also numbers, if so, add all numbers and devide by 3, if they equal the number
+            //after the first number the numbers are continous. then retrun false
+            for (int i = 0; i < this.password.length()-3; i++){
+                if (Character.isDigit(this.password.charAt(i))&& Character.isDigit(this.password.charAt(i+1)) && Character.isDigit(this.password.charAt(i+2))&& Character.isDigit(this.password.charAt(i+3))){
+                    if (((this.password.charAt(i))+(this.password.charAt(i+1))+(this.password.charAt(i+2))+(this.password.charAt(i+3)))/4 == (this.password.charAt(i))) {
+                        return false;
+                    }
+                }
+            }
         return true;
     }
 

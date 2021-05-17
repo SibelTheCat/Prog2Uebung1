@@ -59,9 +59,69 @@ public class PasswordTest {
     Password password = new Password("crashedufo@crash");
     assertFalse(password.checkContainNumber());
   }
+  @Test
+  @DisplayName(" are not more then two continous numbers used")
+  public void testCheckNumbersCont_Scenario1(){
+    Password password = new Password("crashedUfo@47");
+    assertTrue(password.checkNumbersCont());
+  }
+  //cont numbers at the end
+  @Test
+  public void testCheckNumbersCont_Scenario2() {
+    Password password = new Password("crashedufo@456");
+    assertFalse(password.checkNumbersCont());
+  }
+  //cont numbers at front
+  @Test
+  public void testCheckNumbersCont_Scenario3() {
+    Password password = new Password("2345CRasHEDUFOS234@");
+    assertFalse(password.checkNumbersCont());
+  }
+  //no numbers to check
+  @Test
+  public void testCheckNumbersCont_Scenario4() {
+    Password password = new Password("CrashedUf@@os");
+    assertFalse(password.checkNumbersCont());
+  }
+  //first not cont then cont
+  @Test
+  public void testCheckNumbersCont_Scenario5() {
+    Password password = new Password("23CRasHEDUFOS234@");
+    assertFalse(password.checkNumbersCont());
+  }
+  @Test
+  @DisplayName(" are not more then three of the same numbers continously used")
+  public void testCheckNumberSame_Scenario1(){
+    Password password = new Password("crashedUfo@444");
+    assertTrue(password.checkNumberSame());
+  }
+  //cont numbers at the end
+  @Test
+  public void testCheckNumberSame_Scenario2() {
+    Password password = new Password("crashedufo@5555");
+    assertFalse(password.checkNumberSame());
+  }
+  //cont numbers at front
+  @Test
+  public void testCheckNumberSame_Scenario3() {
+    Password password = new Password("22222CRasHEDUFOS234@");
+    assertFalse(password.checkNumberSame());
+  }
+  //no numbers to check
+  @Test
+  public void testCheckNumberSame_Scenario4() {
+    Password password = new Password("CrashedUf@@os");
+    assertFalse(password.checkNumberSame());
+  }
 
   @Test
-  @DisplayName("are valid spacial characters used")
+  public void testCheckNumberSame_Scenario5() {
+    Password password = new Password("333Crashe7777dUf@@os");
+    assertFalse(password.checkNumberSame());
+  }
+
+  @Test
+  @DisplayName("are valid special characters used")
   public void testContainSpecialCharacter_Scenario1(){
     Password password = new Password("crashedUfo@47");
     assertTrue(password.containSpecialCharacter());
