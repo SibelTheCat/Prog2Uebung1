@@ -8,23 +8,29 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PasswordTest {
 
+  private Password password;
+
   @BeforeAll
   static void init() {
   }
 
   @BeforeEach
   void setup() {
+    password = new Password();
   }
 
   @Test
   @DisplayName("Is password length valid")
   public void testPasswordLength_Scenario1() {
-    Password password = new Password("crashedUfo@47");
+    //Password password = new Password("crashedUfo@47");
+    password.setPassword("crashedUfo@47");
     assertTrue(password.passwordLength());
   }
 
   @Test
   public void testPasswordLength_Scenario2() {
+
+    //oder wie oben mit dem setter arbeiten: password.setPassword
     Password password = new Password("Ufo@47");
     assertFalse(password.passwordLength());
   }
@@ -35,10 +41,11 @@ public class PasswordTest {
     assertFalse(password.passwordLength());
   }
 
+
   @Test
   @DisplayName("are upper and lower case letters used")
   public void testCheckUpperAndLowerCase_Scenario1() {
-    Password password = new Password("crashedUfo@47");
+    Password password = new Password("CrashedUfo@47");
     assertTrue(password.checkUpperAndLowerCase());
   }
 
@@ -67,17 +74,18 @@ public class PasswordTest {
     assertFalse(password.checkContainNumber());
   }
 
+
   @Test
   @DisplayName(" are not more then two continous numbers used")
   public void testCheckNumbersCont_Scenario1() {
-    Password password = new Password("crashedUfo@47");
+    Password password = new Password("crashedUfo@40");
     assertTrue(password.checkNumbersCont());
   }
 
   //cont numbers at the end
   @Test
   public void testCheckNumbersCont_Scenario2() {
-    Password password = new Password("crashedufo@456");
+    Password password = new Password("crashedufo@012");
     assertFalse(password.checkNumbersCont());
   }
 
@@ -102,17 +110,18 @@ public class PasswordTest {
     assertFalse(password.checkNumbersCont());
   }
 
+
   @Test
   @DisplayName(" are not more then three of the same numbers continously used")
   public void testCheckNumberSame_Scenario1() {
-    Password password = new Password("crashedUfo@444");
+    Password password = new Password("crashedUfo@40");
     assertTrue(password.checkNumberSame());
   }
 
   //cont numbers at the end
   @Test
   public void testCheckNumberSame_Scenario2() {
-    Password password = new Password("crashedufo@5555");
+    Password password = new Password("crashedufo@0000");
     assertFalse(password.checkNumberSame());
   }
 
@@ -135,6 +144,7 @@ public class PasswordTest {
     Password password = new Password("333Crashe7777dUf@@os");
     assertFalse(password.checkNumberSame());
   }
+
 
   @Test
   @DisplayName("are valid special characters used")
@@ -161,16 +171,17 @@ public class PasswordTest {
     assertFalse(password.containSpecialCharacter());
   }
 
+
   @Test
-  @DisplayName("is hole password valid")
+  @DisplayName("is password valid")
   public void testCheckPassword_Scenario1() {
-    Password password = new Password("crashedUfo@47");
+    Password password = new Password("crashedUfo@40");
     assertTrue(password.checkPassword());
   }
 
   @Test
   public void testCheckPassword_Scenario2() {
-    Password password = new Password("crashed");
+    Password password = new Password("crashedUfo0000");
     assertFalse(password.checkPassword());
   }
 
@@ -182,7 +193,8 @@ public class PasswordTest {
 
   @Test
   public void testCheckPassword_Scenario4() {
-    Password password = new Password("Crashe#dUfo@456");
+//    Password password = new Password("Crashe#dUfo@456");
+    Password password = new Password("CRAKDJF**345");
     assertFalse(password.checkPassword());
   }
 
